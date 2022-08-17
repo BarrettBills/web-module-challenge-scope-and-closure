@@ -30,11 +30,11 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+  Count is declared in the function scope in counter1 while in the global scope in counter2. 
   2. Which of the two uses a closure? How can you tell?
-  
+  Counter1 uses a closure. Variable can only be accessed and changed within the function. 
   3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+     counter2 be better?  Counter1 is better if you want to be able to mutate your data by not having anything hard-coded. Counter2 is better if you don't expect your data to change.
 */
 
 // counter1 code
@@ -64,8 +64,9 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(callback){
+  const teamOne = Math.floor(Math.random() * 2);
+  return teamOne;
 }
 
 
@@ -83,9 +84,20 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(callback, number){
+  let homeTeam = 0;
+  let awayTeam = 0;
+  for (let i = 0; i <= number; i++) {
+    homeTeam = homeTeam + callback();
+    awayTeam = awayTeam + callback();
+  }
+  const results = { 
+    Home: homeTeam, 
+    Away: awayTeam 
+  } 
+    return results;
 }
+console.log(finalScore(inning, 9));
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -101,10 +113,17 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-
-}
+function getInningScore(callback) {
+  let homeTeam1 = 0 + callback();
+  let awayTeam1 = 0 + callback();
+  const inningResult = {
+    Home: homeTeam1,
+    Away: awayTeam1
+  }
+  return inningResult;
+  }  
+  console.log(getInningScore(inning));
+  
 
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
